@@ -40,6 +40,7 @@
             background: bisque;
             border-radius: 5px;
             margin-bottom: 10px;
+            position: relative;
         }
 
         .todo__delete{
@@ -85,6 +86,37 @@
             border-radius: 5px;
             border: 1px solid silver
         }
+
+        .todo__text[readonly],
+        .todo__text[disabled]{
+            background: transparent;
+            border: unset;
+        }
+        .todo__text{
+            background: transparent;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid #000;
+        }
+        .todo__value{
+            left: 0px;
+            top: 0px;
+        }
+
+        .todo__manage-buttons{
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        form{
+            display: block;
+            width: 100%;
+        }
+        span,a{
+            display: block
+        }
     </style>
 </head>
 <body>
@@ -99,15 +131,24 @@
             <div>
                 <h3>{{title}}</h3>
                 <ul class="todo__list">
-                    <li class="todo__item" v-for="(item, index) in json">{{item.title}} <a href="#!" class="todo__delete" :id="item.id" @click="del(item)">x</a></li>
+                    <li class="todo__item" v-for="(item, index) in json">
+                        <form action="php/update.php" method="GET" @submit.prevent="edit(item)">
+                            <span v-if="!item.active" class="todo__value">{{ item.title }}</span>
+                            <input v-if="item.active" type="text" v-model="newTask" :readonly="!item.active" class="todo__text">
+
+                            <a href="#!" class="todo__manage-buttons" @click="toggleReadOnly(index)" v-if="!item.active">edit</a>
+                            <button v-if="item.active" class="todo__manage-buttons" type="submit">done</button>
+                        </form>
+                        <a href="#!" class="todo__delete" @click="del(item)">x</a>
+                    </li>
                 </ul>
                 <p v-if="isEmpty">{{ text.emptyList }}</p>
                 <span @click="toggleClass()" class="todo__add-btn">Добавить задачу +</span>
                 <form :class="{active: isActive}" class="todo__add-form " action="todo/add.php" method="GET" @submit.prevent="addTask">
                     <input class="todo__input" type="text" name="task" placeholder="Помыть посуду" v-model="task">
                     <button class="todo__add-btn mb0" type="submit">Добавить +</button>
-                    <p class="help">{{ text.error }}</p>
                 </form>
+                <p class="help">{{ text.error }}</p>
             </div>
         </script>
     </main>

@@ -4,12 +4,13 @@ Vue.component('todo-list', {
         return {
             json: [],
             task: '',
+            newTask: '',
             isActive: false,
+            isReadOnly: true,
             text:{
                 error: "",
                 emptyList: "Список пуст."
             }
-
         }
     },
     props: {
@@ -25,6 +26,18 @@ Vue.component('todo-list', {
         toggleClass: function (){
             return this.isActive = !this.isActive
         },
+        toggleReadOnly: function(index){
+            let item = this.json[index]
+            item.active = !item.active
+            this.$set(this.json, index, item) 
+        },
+        read: function(){
+            fetch('php/handle.php?table='+this.list)
+            .then(r=>r.json())
+            .then(json => {
+                this.json=json
+            });
+        },
         del: function(index){
             let id = index.id
 
@@ -33,28 +46,32 @@ Vue.component('todo-list', {
             })
             fetch('php/delete.php?id='+index.id+'&table='+this.list)
         },
+        edit: function(index){
+            if(this.newTask.length == 0){
+                this.text.error = "Ошибка! Пустое поле."
+                return false
+            }
+            this.text.error = ""
+
+            fetch('php/edit.php?table='+this.list+"&id="+index.id+"&task="+this.newTask)
+            this.read()
+            this.newTask = ""
+        },
         addTask: function(){
             if(!this.task){
-                this.text.error = "Ошибка"
+                this.text.error = "Ошибка! Пустое поле."
                 return false
             }
             this.text.error = ""
 
             fetch('php/add.php?task='+this.task+"&table="+this.list)
-            fetch('php/handle.php?table='+this.list)
-                .then(r=>r.json())
-                .then(json => {
-                    this.json=json
-                });
+            
+            this.read()
             this.task = ""
         }
     },
     created: function () {
-        fetch('php/handle.php?table='+this.list)
-            .then(r=>r.json())
-            .then(json => {
-                this.json=json
-            });
+        this.read()
     }
 });
 
