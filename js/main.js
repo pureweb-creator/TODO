@@ -5,6 +5,8 @@ Vue.component('todo-list', {
             json: [],
             task: '',
             newTask: '',
+            checkBoxChecked: false,
+            checkBoxCheckedList: [],
             isActive: false,
             isReadOnly: true,
             text:{
@@ -20,6 +22,9 @@ Vue.component('todo-list', {
     computed: {
         isEmpty: function() {
             return this.json.length == 0
+        },
+        isEmptyCheckboxList: function(){
+            return this.checkBoxCheckedList.length == 0
         }
     },
     methods: {
@@ -31,20 +36,29 @@ Vue.component('todo-list', {
             item.active = !item.active
             this.$set(this.json, index, item) 
         },
-        read: function(){
-            fetch('php/handle.php?table='+this.list)
-            .then(r=>r.json())
-            .then(json => {
-                this.json=json
+        deleteSelected: function(){
+            console.log(this.checkBoxCheckedList)
+            axios.get('php/deleteMultiple.php?table='+this.list+'&id='+this.checkBoxCheckedList)
+                .then(response=>console.log(response.data))            
+            this.read()
+            this.task = ""
+            this.checkBoxCheckedList = []
+        },
+        selectAll: function(){
+            this.json.forEach(element => {
+                this.checkBoxCheckedList.push(element.id)
             });
         },
+        read: function(){
+            axios
+                .get('php/handle.php?table='+this.list)
+                .then(response=>this.json=response.data)
+                .catch(error=>console.log(error))
+        },
         del: function(index){
-            let id = index.id
-
-            this.json.forEach((element, index) => {
-                if(element.id == id) this.$delete(this.json,index)
-            })
-            fetch('php/delete.php?id='+index.id+'&table='+this.list)
+            axios.get('php/delete.php?id='+index.id+'&table='+this.list)
+            this.read()
+            this.task = ""
         },
         edit: function(index){
             if(this.newTask.length == 0){
@@ -52,8 +66,8 @@ Vue.component('todo-list', {
                 return false
             }
             this.text.error = ""
-
-            fetch('php/edit.php?table='+this.list+"&id="+index.id+"&task="+this.newTask)
+            
+            axios.get('php/edit.php?table='+this.list+"&id="+index.id+"&task="+this.newTask)
             this.read()
             this.newTask = ""
         },
@@ -64,8 +78,7 @@ Vue.component('todo-list', {
             }
             this.text.error = ""
 
-            fetch('php/add.php?task='+this.task+"&table="+this.list)
-            
+            axios.get('php/add.php?task='+this.task+"&table="+this.list)   
             this.read()
             this.task = ""
         }
