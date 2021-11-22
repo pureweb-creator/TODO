@@ -50,10 +50,14 @@ Vue.component('todo-list', {
             });
         },
         read: function(){
-            axios
-                .get('php/handle.php?table='+this.list)
-                .then(response=>this.json=response.data)
-                .catch(error=>console.log(error))
+            // Один раз почему-то  очень плохо работает..
+            for (let i = 0; i < 2; i++) {
+                axios
+                    .get('php/handle.php?table='+this.list)
+                    .then(response=>this.json=response.data)
+                    .catch(error=>console.log(error))    
+            }
+            
         },
         del: function(index){
             axios.get('php/delete.php?id='+index.id+'&table='+this.list)
