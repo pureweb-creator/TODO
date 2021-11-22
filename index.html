@@ -22,23 +22,21 @@
         <script type="text/x-template" id="todo-list-template">
             <div>
                 <h3>{{title}}</h3>
-                <a v-if="!isEmptyCheckboxList" class="todo__add-btn" @click="selectAll()">Select All </a>
-                <a v-if="!isEmptyCheckboxList" class="todo__add-btn" @click="deleteSelected()">Delete selected</a>
+                <a v-if="!isEmptyCheckboxList" class="todo__add-btn" @click="selectAll()">Выбрать все </a>
+                <a v-if="!isEmptyCheckboxList" class="todo__add-btn" @click="deleteSelected()">Удалить выбранное</a>
 
                 <ul class="todo__list">
                     <li class="todo__item" v-for="(item, index) in json">
                         <label :for="index" class="custom-checkbox">
                             <input type="checkbox" :value="item.id" v-model="checkBoxCheckedList" class="custom-checkbox__input" :id="index">
-                            <div class="check">
-                                <img src="images/tick.svg" alt="">
-                            </div>
+                            <div class="check"><img src="images/tick.svg" alt=""></div>
 
                             <form action="php/update.php" method="GET" @submit.prevent="edit(item)">
-                                <span v-if="!item.active" class="todo__value">{{ item.title }}</span>
-                                <input v-if="item.active" type="text" v-model="newTask" :readonly="!item.active" class="todo__text">
+                                <span v-show="!item.active" class="todo__value">{{ item.title }}</span>
+                                <input v-show="item.active" type="text" ref="edit_task" v-model="item.title" class="todo__text">
 
-                                <a href="#!" class="todo__manage-buttons todo__delete" @click="toggleReadOnly(index)" v-if="!item.active"><img src="images/pen.png" alt=""></a>
-                                <button v-if="item.active" class="todo__manage-buttons todo__add-btn" type="submit">done</button>
+                                <a href="#!" class="todo__manage-buttons todo__delete" @click="toggleTaskView(index)" v-show="!item.active"><img src="images/pen.png" alt=""></a>
+                                <button v-show="item.active" class="todo__manage-buttons todo__add-btn" type="submit">done</button>
                             </form>
                             <a href="#!" class="todo__delete" @click="del(item)">x</a>
                         </label>

@@ -4,7 +4,6 @@ Vue.component('todo-list', {
         return {
             json: [],
             task: '',
-            newTask: '',
             checkBoxChecked: false,
             checkBoxCheckedList: [],
             isActive: false,
@@ -31,10 +30,12 @@ Vue.component('todo-list', {
         toggleClass: function (){
             return this.isActive = !this.isActive
         },
-        toggleReadOnly: function(index){
+        toggleTaskView: function(index){
             let item = this.json[index]
             item.active = !item.active
-            this.$set(this.json, index, item) 
+            this.$set(this.json, index, item)
+
+            this.$nextTick(() => this.$refs.edit_task[index].focus())
         },
         deleteSelected: function(){
             console.log(this.checkBoxCheckedList)
@@ -65,15 +66,15 @@ Vue.component('todo-list', {
             this.task = ""
         },
         edit: function(index){
-            if(this.newTask.length == 0){
+            if(index.title.length == 0){
                 this.text.error = "Ошибка! Пустое поле."
                 return false
             }
             this.text.error = ""
             
-            axios.get('php/edit.php?table='+this.list+"&id="+index.id+"&task="+this.newTask)
+            axios.get('php/edit.php?table='+this.list+"&id="+index.id+"&task="+index.title)
             this.read()
-            this.newTask = ""
+            index.title = ""
         },
         addTask: function(){
             if(!this.task){
