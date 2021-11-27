@@ -1,16 +1,14 @@
 <?php
-require_once('config.php');
+require_once('includes/config.php');
 
 $tableName = $_GET['table'];
 $response = [];
+$uid = @$_SESSION['logged_user']->id;
 
-switch ($tableName){
-    case 'pages': $query = $pdo->query('SELECT * FROM `pages`'); break;
-    case 'news': $query = $pdo->query('SELECT * FROM `news`'); break;
-}
+$taskslist = R::find($tableName,'users_id = :id',[':id'=>$uid]);
 
-while($row = $query->fetch(PDO::FETCH_OBJ)){
-    $response[] = $row;
+foreach($taskslist as $task){
+    $response[] = $task;
 }
 
 echo json_encode($response);

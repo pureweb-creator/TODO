@@ -38,13 +38,13 @@ Vue.component('todo-list', {
             this.$nextTick(() => this.$refs.edit_task[index].focus())
         },
         deleteSelected: function(){
-            console.log(this.checkBoxCheckedList)
-            axios.get('php/deleteMultiple.php?table='+this.list+'&id='+this.checkBoxCheckedList)
+            axios.get('php/delete.php?table='+this.list+'&id='+this.checkBoxCheckedList)
                 .then(response=>console.log(response.data))            
             this.read()
             this.task = ""
             this.checkBoxCheckedList = []
         },
+        // По нажатию на кнопку "выбрать все", скриптом пушим в массив все чекбоксы.
         selectAll: function(){
             this.json.forEach(element => {
                 this.checkBoxCheckedList.push(element.id)
@@ -94,5 +94,58 @@ Vue.component('todo-list', {
 });
 
 new Vue({
-    el: "#app"
+    el: "#app",
+    methods: {
+        logout: function(){
+            axios
+                .get('php/sign-up/logout.php')
+                .then(response=>console.log(response.data))
+                .catch(error=>console.log(error.data));
+            window.location.href = './sign-in.php';
+        }
+    }
+});
+
+new Vue({
+    el: "#reg",
+    data:{
+        login: '',
+        pass: '',
+        response: ''
+    },
+    methods: {
+        reg: function(){
+            axios
+                .get('php/sign-up/do_sign_up.php?login='+this.login+'&pass='+this.pass)
+                .then(response=>{
+                    this.response=response.data
+                    if(this.response.data=="OK"){
+                        window.location.replace("./"); 
+                    }
+                })
+                .catch(error=>console.log(error.data));
+        }
+    }
+});
+
+new Vue({
+    el: "#auth",
+    data:{
+        login: '',
+        pass: '',
+        response: ''
+    },
+    methods: {
+        reg: function(){
+            axios
+                .get('php/sign-up/do_sign_in.php?login='+this.login+'&pass='+this.pass)
+                .then(response=>{
+                    this.response=response;
+                    if(this.response.data=="OK"){
+                        window.location.replace("./"); 
+                    }
+                })
+                .catch(error=>console.log(error.data));
+        }
+    }
 });

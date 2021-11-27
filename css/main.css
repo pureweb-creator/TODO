@@ -16,6 +16,14 @@ svg{
     display: block;
     width: 30px;
 }
+.text-center{
+    text-align: center;
+}
+.logo{
+    width: 90px;
+    margin: 60px auto 0 auto;
+    display: block;
+}
 .custom-checkbox{
     display: flex;
     cursor: pointer;
@@ -43,14 +51,21 @@ input:checked + .check img{
     display: block
 }
 main{
-    max-width: 500px;
+    max-width: 1100px;
     width: 100%;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 40px;
     background: #fff;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 2px 2px 50px #ccc;
+}
+
+.tasks-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 30px;
+    width:  100%
 }
 
 .todo__item{
@@ -152,4 +167,13 @@ form{
 }
 span,a{
     display: block
+}
+
+.todo__reg-form .todo__input{
+    width: 50%;
+    margin-left:auto;
+    margin-right: auto;
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }

@@ -1,14 +1,17 @@
 <?php 
 
-require "config.php";
+require "includes/config.php";
 
 $id = $_GET['id'];
+$ids = explode(",", $id);
 $tableName = $_GET['table'];
 
-switch ($tableName){
-    case 'pages': $sql = 'DELETE FROM `pages` WHERE `id` = ?'; break;
-    case 'news': $sql = 'DELETE FROM `news` WHERE `id` = ?'; break;
+if( !is_array($ids) ){
+    $taskToDelete = R::load($tableName,$id);
+    R::trash($taskToDelete);
+} else {
+    $tasksToDelete = [];
+    foreach($ids as $id)
+        $tasksToDelete[] = R::load($tableName,$id);
+    R::trashAll($tasksToDelete);
 }
-
-$query = $pdo->prepare($sql);
-$query->execute([$id]);
