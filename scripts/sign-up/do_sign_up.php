@@ -1,7 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/phptutor/todo/php/includes/config.php';
-
+require_once '../includes/config.php';
 
 $login = $_REQUEST['login'];
 $pass = $_REQUEST['pass'];
@@ -18,7 +17,7 @@ else{
     $user->pass = password_hash($pass, PASSWORD_DEFAULT);
 
     $task = R::dispense('pages');
-    $task->title="";
+    $task->title="Моя первая задача";
     $task->content="";
 
     $user->ownPagesList[] = $task;

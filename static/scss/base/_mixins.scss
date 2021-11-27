@@ -1,0 +1,35 @@
+@mixin btn{
+  background: $primary1;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+}
+
+@mixin flex{
+  display: flex;
+}
+
+@mixin align-h{
+  @include flex;
+  justify-content: center;
+}
+
+@mixin align-v{
+  @include flex;
+  align-items: center;
+}
+
+@mixin align-both{
+  @include flex;
+  @include align-h;
+  @include align-v;
+}
+
+@mixin input{
+  outline: none;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid silver;
+}

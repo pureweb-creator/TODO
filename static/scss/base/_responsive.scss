@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+  body{
+    padding: 0 15px;
+  }
+  main{
+    padding: 5px !important;
+  }
+  .title{
+    margin-left: 10px;
+    margin-bottom: 10px !important;}
+  .subtitle{
+    margin-bottom: 10px !important;}
+
+  .tasks-wrapper>div{
+    width: 100% !important;
+    margin-bottom: 20px;
+    border-right: unset !important
+  }
+}

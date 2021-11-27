@@ -1,0 +1,9 @@
+.todo__add-btn{
+  @include btn;
+  margin-bottom: 10px;
+
+  &:hover{
+    background: darken($primary1,20);
+  }
+
+}

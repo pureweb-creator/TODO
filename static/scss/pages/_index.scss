@@ -1,0 +1,75 @@
+.tasks-wrapper{
+  @include flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &>div{
+    flex-grow: 1;
+    width: 33%;
+    padding: 0 10px;
+    border-right: 1px solid #e0dfdf;
+    &:last-child{
+      border-right: 0;
+    }
+  }
+}
+
+.todo {
+    &__item {
+      background: $primary2;
+      border-radius: 5px;
+      padding: 7px 7px 7px 9px;
+      margin-bottom: 10px;
+
+      &:hover {
+        background: darken($primary2, 10);
+      }
+    }
+    .selected{
+      background: darken($primary2, 10);
+    }
+    &__edit-form {
+      @include align-v;
+      width: 100%;
+    }
+  &__manage-buttons{
+    @include align-both;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 5px;
+    background: #fff;
+    margin-left: auto;
+    cursor: pointer;
+    flex-shrink: 0;
+    &:hover{
+      background: darken(#fff,10);
+    }
+  }
+  &__manage-buttons_edit-btn,
+  &__manage-buttons_save-btn{
+    margin-right: 5px;
+  }
+
+  &__task-edit-field{
+    border-bottom: 1px solid #000;
+    width: 100%;
+    position: relative;
+    bottom: -1px;
+    margin-right: 7px;
+    line-height: 1em;
+  }
+}
+
+.add-task-form{
+  @include align-v;
+  &__input{
+    @include input;
+    width: 100%;
+    margin-right: 10px;
+  }
+  &__btn{
+    margin-bottom: 0 !important;
+    flex-shrink: 0;
+  }
+}

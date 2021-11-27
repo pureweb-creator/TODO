@@ -34,34 +34,39 @@ Vue.component('todo-list', {
             let item = this.json[index]
             item.active = !item.active
             this.$set(this.json, index, item)
-
             this.$nextTick(() => this.$refs.edit_task[index].focus())
         },
         deleteSelected: function(){
-            axios.get('php/delete.php?table='+this.list+'&id='+this.checkBoxCheckedList)
+            axios.get('scripts/delete.php?table='+this.list+'&id='+this.checkBoxCheckedList)
                 .then(response=>console.log(response.data))            
             this.read()
             this.task = ""
             this.checkBoxCheckedList = []
         },
+        select: function(element){
+            let item = this.json[element]
+            item.selected = !item.selected
+            this.$set(this.json, element, item)
+        },
         // По нажатию на кнопку "выбрать все", скриптом пушим в массив все чекбоксы.
         selectAll: function(){
             this.json.forEach(element => {
                 this.checkBoxCheckedList.push(element.id)
+                element.selected = true
             });
         },
         read: function(){
             // Один раз почему-то  очень плохо работает..
             for (let i = 0; i < 2; i++) {
                 axios
-                    .get('php/handle.php?table='+this.list)
+                    .get('scripts/handle.php?table='+this.list)
                     .then(response=>this.json=response.data)
                     .catch(error=>console.log(error))    
             }
             
         },
         del: function(index){
-            axios.get('php/delete.php?id='+index.id+'&table='+this.list)
+            axios.get('scripts/delete.php?id='+index.id+'&table='+this.list)
             this.read()
             this.task = ""
         },
@@ -72,7 +77,7 @@ Vue.component('todo-list', {
             }
             this.text.error = ""
             
-            axios.get('php/edit.php?table='+this.list+"&id="+index.id+"&task="+index.title)
+            axios.get('scripts/edit.php?table='+this.list+"&id="+index.id+"&task="+index.title)
             this.read()
             index.title = ""
         },
@@ -83,7 +88,7 @@ Vue.component('todo-list', {
             }
             this.text.error = ""
 
-            axios.get('php/add.php?task='+this.task+"&table="+this.list)   
+            axios.get('scripts/add.php?task='+this.task+"&table="+this.list)
             this.read()
             this.task = ""
         }
@@ -98,7 +103,7 @@ new Vue({
     methods: {
         logout: function(){
             axios
-                .get('php/sign-up/logout.php')
+                .get('scripts/sign-up/logout.php')
                 .then(response=>console.log(response.data))
                 .catch(error=>console.log(error.data));
             window.location.href = './sign-in.php';
@@ -106,46 +111,3 @@ new Vue({
     }
 });
 
-new Vue({
-    el: "#reg",
-    data:{
-        login: '',
-        pass: '',
-        response: ''
-    },
-    methods: {
-        reg: function(){
-            axios
-                .get('php/sign-up/do_sign_up.php?login='+this.login+'&pass='+this.pass)
-                .then(response=>{
-                    this.response=response.data
-                    if(this.response.data=="OK"){
-                        window.location.replace("./"); 
-                    }
-                })
-                .catch(error=>console.log(error.data));
-        }
-    }
-});
-
-new Vue({
-    el: "#auth",
-    data:{
-        login: '',
-        pass: '',
-        response: ''
-    },
-    methods: {
-        reg: function(){
-            axios
-                .get('php/sign-up/do_sign_in.php?login='+this.login+'&pass='+this.pass)
-                .then(response=>{
-                    this.response=response;
-                    if(this.response.data=="OK"){
-                        window.location.replace("./"); 
-                    }
-                })
-                .catch(error=>console.log(error.data));
-        }
-    }
-});

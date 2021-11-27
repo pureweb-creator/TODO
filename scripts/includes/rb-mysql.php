@@ -7,7 +7,7 @@ namespace RedBeanPHP {
  * Provides a uniform and convenient logging
  * interface throughout RedBeanPHP.
  *
- * @file    RedBean/Logging.php
+ * @file    RedBean/Logging.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -43,7 +43,7 @@ use RedBeanPHP\RedException as RedException;
 /**
  * Logger. Provides a basic logging function for RedBeanPHP.
  *
- * @file    RedBeanPHP/Logger.php
+ * @file    RedBeanPHP/Logger.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -179,7 +179,7 @@ use RedBeanPHP\RedException as RedException;
  * A special logger for debugging purposes.
  * Provides debugging logging functions for RedBeanPHP.
  *
- * @file    RedBeanPHP/Logger/RDefault/Debug.php
+ * @file    RedBeanPHP/Logger/RDefault/Debug.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -445,7 +445,7 @@ namespace RedBeanPHP {
  * The Driver API conforms to the ADODB pseudo standard
  * for database drivers.
  *
- * @file       RedBeanPHP/Driver.php
+ * @file       RedBeanPHP/Driver.scripts
  * @author     Gabor de Mooij and the RedBeanPHP Community
  * @license    BSD/GPLv2
  *
@@ -649,7 +649,7 @@ use RedBeanPHP\Cursor\PDOCursor as PDOCursor;
  * for RedBeanPHP. This is the standard / default database driver
  * for RedBeanPHP.
  *
- * @file    RedBeanPHP/PDO.php
+ * @file    RedBeanPHP/PDO.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community, Desfrenes
  * @license BSD/GPLv2
  *
@@ -827,7 +827,7 @@ class RPDO implements Driver
 				$this->resultArray = array();
 			}
 		} catch ( \PDOException $e ) {
-			//Unfortunately the code field is supposed to be int by default (php)
+			//Unfortunately the code field is supposed to be int by default (scripts)
 			//So we need a property to convey the SQL State code.
 			$err = $e->getMessage();
 			if ( $this->loggingEnabled && $this->logger ) $this->logger->log( 'An error occurred: ' . $err );
@@ -1602,7 +1602,7 @@ if (interface_exists('\JsonSerializable')) { interface Jsonable extends \JsonSer
  * a single table row and offers generic services for interaction
  * with databases systems as well as some meta-data.
  *
- * @file    RedBeanPHP/OODBBean.php
+ * @file    RedBeanPHP/OODBBean.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  * @desc    OODBBean represents a bean. RedBeanPHP uses beans
@@ -2651,9 +2651,9 @@ class OODBBean implements \IteratorAggregate,\ArrayAccess,\Countable,Jsonable
 			 *
 			 * leads to regression:
 			 * PHP Stack trace:
-			 * PHP 1. {main}() testje.php:0
-			 * PHP 2. RedBeanPHP\OODBBean->__get() testje.php:22
-			 * Notice: Only variable references should be returned by reference in rb.php on line 2529
+			 * PHP 1. {main}() testje.scripts:0
+			 * PHP 2. RedBeanPHP\OODBBean->__get() testje.scripts:22
+			 * Notice: Only variable references should be returned by reference in rb.scripts on line 2529
 			 */
 			$NULL = NULL;
 			return $NULL;
@@ -3871,7 +3871,7 @@ use RedBeanPHP\Observer as Observer;
  * Observable
  * Base class for Observables
  *
- * @file            RedBeanPHP/Observable.php
+ * @file            RedBeanPHP/Observable.scripts
  * @author          Gabor de Mooij and the RedBeanPHP community
  * @license         BSD/GPLv2
  *
@@ -3944,7 +3944,7 @@ namespace RedBeanPHP {
  * Interface for Observer object. Implementation of the
  * observer pattern.
  *
- * @file    RedBeanPHP/Observer.php
+ * @file    RedBeanPHP/Observer.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  * @desc    Part of the observer pattern in RedBean
@@ -3979,7 +3979,7 @@ namespace RedBeanPHP {
  * This interface defines the API contract for
  * a RedBeanPHP Database Adapter.
  *
- * @file    RedBeanPHP/Adapter.php
+ * @file    RedBeanPHP/Adapter.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -4194,7 +4194,7 @@ use RedBeanPHP\Driver as Driver;
  * the RedBeanPHP library is the RPDO driver ( which uses the PHP Data Objects
  * Architecture aka PDO ).
  *
- * @file    RedBeanPHP/Adapter/DBAdapter.php
+ * @file    RedBeanPHP/Adapter/DBAdapter.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community.
  * @license BSD/GPLv2
  *
@@ -4482,7 +4482,7 @@ namespace RedBeanPHP {
  * by default RedBeanPHP offers the PDOCursor for drivers shipping
  * with RedBeanPHP and the NULLCursor.
  *
- * @file    RedBeanPHP/Cursor.php
+ * @file    RedBeanPHP/Cursor.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -4532,7 +4532,7 @@ use RedBeanPHP\Cursor as Cursor;
  * of large bean collections. For instance, this class is used to
  * implement the findCollection()/BeanCollection functionality.
  *
- * @file    RedBeanPHP/Cursor/PDOCursor.php
+ * @file    RedBeanPHP/Cursor/PDOCursor.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -4605,7 +4605,7 @@ use RedBeanPHP\Cursor as Cursor;
  * can be used for instance if a query fails but the interface
  * demands a cursor to be returned.
  *
- * @file    RedBeanPHP/Cursor/NULLCursor.php
+ * @file    RedBeanPHP/Cursor/NULLCursor.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -4661,7 +4661,7 @@ use RedBeanPHP\Repository as Repository;
  * option. Keep in mind that ID-marking (querying a start ID) is a decent
  * alternative though.
  *
- * @file    RedBeanPHP/BeanCollection.php
+ * @file    RedBeanPHP/BeanCollection.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  *
@@ -4761,7 +4761,7 @@ namespace RedBeanPHP {
  * - tableNoQ (same as type, but in context of a database operation)
  * - columnNoQ (same as property, but in context of a database operation)
  *
- * @file    RedBeanPHP/QueryWriter.php
+ * @file    RedBeanPHP/QueryWriter.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  *
@@ -5317,7 +5317,7 @@ use RedBeanPHP\RedException\SQL as SQLException;
  * Contains a number of functions all implementors can
  * inherit or override.
  *
- * @file    RedBeanPHP/QueryWriter/AQueryWriter.php
+ * @file    RedBeanPHP/QueryWriter/AQueryWriter.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -6982,7 +6982,7 @@ use RedBeanPHP\RedException\SQL as SQLException;
  * This is a QueryWriter class for RedBeanPHP.
  * This QueryWriter provides support for the MySQL/MariaDB database platform.
  *
- * @file    RedBeanPHP/QueryWriter/MySQL.php
+ * @file    RedBeanPHP/QueryWriter/MySQL.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -7441,7 +7441,7 @@ use RedBeanPHP\RedException\SQL as SQLException;
  * This is a QueryWriter class for RedBeanPHP.
  * This QueryWriter provides support for the CUBRID database platform.
  *
- * @file    RedBeanPHP/QueryWriter/CUBRID.php
+ * @file    RedBeanPHP/QueryWriter/CUBRID.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -7799,7 +7799,7 @@ namespace RedBeanPHP {
  * RedBean\Exception Base.
  * Represents the base class for RedBeanPHP\Exceptions.
  *
- * @file    RedBeanPHP/Exception.php
+ * @file    RedBeanPHP/Exception.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -7821,7 +7821,7 @@ use RedBeanPHP\RedException as RedException;
  * SQL Exception.
  * Represents a generic database exception independent of the underlying driver.
  *
- * @file       RedBeanPHP/RedException/SQL.php
+ * @file       RedBeanPHP/RedException/SQL.scripts
  * @author     Gabor de Mooij and the RedBeanPHP Community
  * @license    BSD/GPLv2
  *
@@ -7914,7 +7914,7 @@ use RedBeanPHP\Cursor\NullCursor as NullCursor;
  * allows you to swap the repository instances using the freeze()
  * method.
  *
- * @file    RedBeanPHP/Repository.php
+ * @file    RedBeanPHP/Repository.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  *
@@ -8653,7 +8653,7 @@ use RedBeanPHP\Repository as Repository;
  * allows you to swap the repository instances using the freeze()
  * method.
  *
- * @file    RedBeanPHP/Repository/Fluid.php
+ * @file    RedBeanPHP/Repository/Fluid.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  *
@@ -8976,7 +8976,7 @@ use RedBeanPHP\Repository as Repository;
  * allows you to swap the repository instances using the freeze()
  * method.
  *
- * @file    RedBeanPHP/Repository/Frozen.php
+ * @file    RedBeanPHP/Repository/Frozen.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  *
@@ -9152,7 +9152,7 @@ use RedBeanPHP\Repository\Frozen as FrozenRepo;
  * database as well as providing other CRUD functions. This class acts as a
  * object database.
  *
- * @file    RedBeanPHP/OODB.php
+ * @file    RedBeanPHP/OODB.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  *
@@ -9746,7 +9746,7 @@ use RedBeanPHP\Adapter as Adapter;
  * the adapter, the query writer and the core functionality of RedBeanPHP in
  * OODB.
  *
- * @file      RedBeanPHP/ToolBox.php
+ * @file      RedBeanPHP/ToolBox.scripts
  * @author    Gabor de Mooij and the RedBeanPHP community
  * @license   BSD/GPLv2
  *
@@ -9907,7 +9907,7 @@ namespace RedBeanPHP {
  * OODB::find() method, which is rather complex. This class can be
  * used to find beans using plain old SQL queries.
  *
- * @file    RedBeanPHP/Finder.php
+ * @file    RedBeanPHP/Finder.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -10471,7 +10471,7 @@ use RedBeanPHP\RedException\SQL as SQLException;
  * one bean can be associated with many other beans, while each of those beans
  * can also be related to multiple beans.
  *
- * @file    RedBeanPHP/AssociationManager.php
+ * @file    RedBeanPHP/AssociationManager.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -10838,7 +10838,7 @@ use RedBeanPHP\OODBBean as OODBBean;
  * the getModelForBean method you can tune the FUSEing to
  * fit your business application needs.
  *
- * @file    RedBeanPHP/IBeanHelper.php
+ * @file    RedBeanPHP/IBeanHelper.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -10895,7 +10895,7 @@ use RedBeanPHP\SimpleModelHelper as SimpleModelHelper;
  * FUSE models. This Bean Helper makes use of the facade to obtain a
  * reference to the toolbox.
  *
- * @file    RedBeanPHP/BeanHelperFacade.php
+ * @file    RedBeanPHP/BeanHelperFacade.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -11002,7 +11002,7 @@ use RedBeanPHP\OODBBean as OODBBean;
  * models. Models are connected to beans by naming conventions.
  * Actions on beans will result in actions on models.
  *
- * @file       RedBeanPHP/SimpleModel.php
+ * @file       RedBeanPHP/SimpleModel.scripts
  * @author     Gabor de Mooij and the RedBeanPHP Team
  * @license    BSD/GPLv2
  *
@@ -11129,7 +11129,7 @@ use RedBeanPHP\Observable as Observable;
  * Connects beans to models.
  * This is the core of so-called FUSE.
  *
- * @file    RedBeanPHP/ModelHelper.php
+ * @file    RedBeanPHP/ModelHelper.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -11203,7 +11203,7 @@ use RedBeanPHP\OODBBean as OODBBean;
  * Provides methods to tag beans and perform tag-based searches in the
  * bean database.
  *
- * @file       RedBeanPHP/TagManager.php
+ * @file       RedBeanPHP/TagManager.scripts
  * @author     Gabor de Mooij and the RedBeanPHP community
  * @license    BSD/GPLv2
  *
@@ -11571,7 +11571,7 @@ use RedBeanPHP\OODBBean as OODBBean;
  * This service class provides convenience methods to deal with this kind of
  * beans.
  *
- * @file       RedBeanPHP/LabelMaker.php
+ * @file       RedBeanPHP/LabelMaker.scripts
  * @author     Gabor de Mooij and the RedBeanPHP Community
  * @license    BSD/GPLv2
  *
@@ -11775,7 +11775,7 @@ use RedBeanPHP\Util\Feature;
  * RedBeanPHP behind a single letter class providing
  * almost all functionality with simple static calls.
  *
- * @file    RedBeanPHP/Facade.php
+ * @file    RedBeanPHP/Facade.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -15116,7 +15116,7 @@ use RedBeanPHP\QueryWriter\AQueryWriter as AQueryWriter;
  * reformat the keys of an array, this method is publicly available and
  * used internally by exportAll().
  *
- * @file    RedBeanPHP/DuplicationManager.php
+ * @file    RedBeanPHP/DuplicationManager.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -15577,7 +15577,7 @@ use RedBeanPHP\RedException as RedException;
  * This is a helper or service class containing frequently used
  * array functions for dealing with SQL queries.
  *
- * @file    RedBeanPHP/Util/ArrayTool.php
+ * @file    RedBeanPHP/Util/ArrayTool.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -15660,7 +15660,7 @@ use RedBeanPHP\RedException as RedException;
  *
  * A helper class containing a dispense utility.
  * 
- * @file    RedBeanPHP/Util/DispenseHelper.php
+ * @file    RedBeanPHP/Util/DispenseHelper.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -15874,7 +15874,7 @@ use RedBeanPHP\OODBBean as OODBBean;
  * Dumps the contents of a bean in an array for
  * debugging purposes.
  *
- * @file    RedBeanPHP/Util/Dump.php
+ * @file    RedBeanPHP/Util/Dump.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -15944,7 +15944,7 @@ use RedBeanPHP\OODB as OODB;
  * relations by providing a service to load a set of beans
  * with differnt types and a common ID.
  *
- * @file    RedBeanPHP/Util/MultiLoader.php
+ * @file    RedBeanPHP/Util/MultiLoader.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16005,7 +16005,7 @@ use RedBeanPHP\Adapter as Adapter;
  * to perform a callback in a database transaction. This class
  * contains a method to wrap your callback in a transaction.
  *
- * @file    RedBeanPHP/Util/Transaction.php
+ * @file    RedBeanPHP/Util/Transaction.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16089,7 +16089,7 @@ use RedBeanPHP\ToolBox as ToolBox;
  * The Quick Export Utility Class provides functionality to easily
  * expose the result of SQL queries as well-known formats like CSV.
  *
- * @file    RedBeanPHP/Util/QuickExporft.php
+ * @file    RedBeanPHP/Util/QuickExporft.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16219,7 +16219,7 @@ use RedBeanPHP\Finder;
  * Typically login related problems are all about a match and
  * a conditional update.
  *
- * @file    RedBeanPHP/Util/MatchUp.php
+ * @file    RedBeanPHP/Util/MatchUp.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16334,7 +16334,7 @@ use RedBeanPHP\Finder;
  * The Look Utility class provides an easy way to generate
  * tables and selects (pulldowns) from the database.
  *
- * @file    RedBeanPHP/Util/Look.php
+ * @file    RedBeanPHP/Util/Look.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16443,7 +16443,7 @@ use RedBeanPHP\Finder;
  * The Look Utility class provides an easy way to generate
  * tables and selects (pulldowns) from the database.
  * 
- * @file    RedBeanPHP/Util/Diff.php
+ * @file    RedBeanPHP/Util/Diff.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16559,7 +16559,7 @@ use RedBeanPHP\OODBBean;
  *
  * @experimental feature
  *
- * @file    RedBeanPHP/Util/Tree.php
+ * @file    RedBeanPHP/Util/Tree.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16769,7 +16769,7 @@ use RedBeanPHP\OODBBean;
  * on or off features. This allows us to introduce new features
  * without accidentally breaking backward compatibility.
  *
- * @file    RedBeanPHP/Util/Feature.php
+ * @file    RedBeanPHP/Util/Feature.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16876,7 +16876,7 @@ namespace RedBeanPHP {
  * plugin. This plugin interface does not require you to
  * implement a specific API.
  *
- * @file    RedBean/Plugin.php
+ * @file    RedBean/Plugin.scripts
  * @author  Gabor de Mooij and the RedBeanPHP Community
  * @license BSD/GPLv2
  *
@@ -16906,7 +16906,7 @@ if (!class_exists('R')) {
  * Support functions for RedBeanPHP.
  * Additional convenience shortcut functions for RedBeanPHP.
  *
- * @file    RedBeanPHP/Functions.php
+ * @file    RedBeanPHP/Functions.scripts
  * @author  Gabor de Mooij and the RedBeanPHP community
  * @license BSD/GPLv2
  *
