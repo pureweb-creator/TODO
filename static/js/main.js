@@ -55,6 +55,12 @@ Vue.component('todo-list', {
                 element.selected = true
             });
         },
+        uncheckAll: function(){
+            this.json.forEach(element => {
+                this.checkBoxCheckedList.splice(element)
+                element.selected = false
+            })
+        },
         read: function(){
             // Один раз почему-то  очень плохо работает..
             for (let i = 0; i < 2; i++) {

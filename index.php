@@ -23,6 +23,7 @@ if(isset($user->id)): ?>
         <div>
             <h3 class="subtitle">{{title}}</h3>
             <a v-if="!isEmptyCheckboxList" class="todo__add-btn" @click="selectAll()">Выбрать все </a>
+            <a v-if="!isEmptyCheckboxList" class="todo__add-btn" @click="uncheckAll()">Снять все</a>
             <a v-if="!isEmptyCheckboxList" class="todo__add-btn" @click="deleteSelected()">Удалить выбранное</a>
 
             <ul class="todo__list">
