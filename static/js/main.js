@@ -43,6 +43,7 @@ Vue.component('todo-list', {
             this.task = ""
             this.checkBoxCheckedList = []
         },
+        // просто добавляет класс к выбранному пункту. Добавление в массив происходит через v-model
         select: function(element){
             let item = this.json[element]
             item.selected = !item.selected
