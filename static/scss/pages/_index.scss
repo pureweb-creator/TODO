@@ -32,24 +32,6 @@
       @include align-v;
       width: 100%;
     }
-  &__manage-buttons{
-    @include align-both;
-    width: 30px;
-    height: 30px;
-    padding: 4px;
-    border-radius: 5px;
-    background: #fff;
-    margin-left: auto;
-    cursor: pointer;
-    flex-shrink: 0;
-    &:hover{
-      background: darken(#fff,10);
-    }
-  }
-  &__manage-buttons_edit-btn,
-  &__manage-buttons_save-btn{
-    margin-right: 5px;
-  }
 
   &__task-edit-field{
     border-bottom: 1px solid #000;

@@ -5,6 +5,13 @@
   display: inline-block;
   cursor: pointer;
   border: none;
+  @include btn-active;
+}
+
+@mixin btn-active{
+  &:active{
+    transform: scale(.95);
+  }
 }
 
 @mixin flex{
@@ -22,7 +29,6 @@
 }
 
 @mixin align-both{
-  @include flex;
   @include align-h;
   @include align-v;
 }
