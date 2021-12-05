@@ -22,18 +22,19 @@ Vue.component('todo-list', {
     },
     computed: {
         isEmpty: function() {
-            return this.json.length == 0
+            return this.json.length === 0
         },
         isEmptyCheckboxList: function(){
-            return this.checkBoxCheckedList.length == 0
+            return this.checkBoxCheckedList.length === 0
         }
     },
     methods: {
         toggleClass: function (){
             this.soundEvent.play()
+            this.uncheckAll()
             return this.isActive = !this.isActive
         },
-        toggleTaskView: function(index){
+        toggleTaskView: function(index,element){
             this.soundEvent.play()
             this.uncheckAll()
 
@@ -56,15 +57,17 @@ Vue.component('todo-list', {
             this.task = ""
             this.checkBoxCheckedList = []
         },
-        // просто добавляет класс к выбранному пункту. Добавление в массив происходит через v-model
+
+        // Добавление в массив происходит через v-model
         select: function(element){
             this.soundEvent.play()
             let item = this.json[element]
             item.selected = !item.selected
             this.$set(this.json, element, item)
         },
+
         // По нажатию на кнопку "выбрать все", скриптом пушим в массив все чекбоксы.
-        selectAll: function(){
+        checkAll: function(){
             this.soundEvent.play()
 
             this.json.forEach(element => {
@@ -80,37 +83,12 @@ Vue.component('todo-list', {
                 element.active = false
             })
         },
-        read: function(){
-            // Один раз почему-то  очень плохо работает..
-            for (let i = 0; i < 2; i++) {
-                axios
-                    .get('scripts/handle.php?table='+this.list)
-                    .then(response=>this.json=response.data)
-                    .catch(error=>console.log(error))    
-            }
-            
-        },
-        del: function(index){
-            this.soundEvent.play()
-            axios.get('scripts/delete.php?id='+index.id+'&table='+this.list)
-            this.read()
-            this.task = ""
-        },
-        edit: function(index){
-            this.soundEvent.play()
-            if(index.title.length == 0){
-                this.text.error = "Ошибка! Пустое поле."
-                return false
-            }
-            this.text.error = ""
-            this.checkBoxCheckedList.splice(index)
-            
-            axios.get('scripts/edit.php?table='+this.list+"&id="+index.id+"&task="+index.title)
-            this.read()
-            index.title = ""
-        },
+
+        // create
         addTask: function(){
             this.soundEvent.play()
+            this.uncheckAll()
+            
             if(!this.task){
                 this.text.error = "Ошибка! Пустое поле."
                 return false
@@ -120,10 +98,42 @@ Vue.component('todo-list', {
             axios.get('scripts/add.php?task='+this.task+"&table="+this.list)
             this.read()
             this.task = ""
-        }
+        },
+        //retrieve
+        read: function(){
+            // Один раз почему-то  очень плохо работает..
+            for (let i = 0; i < 2; i++) {
+                axios
+                    .get('scripts/handle.php?table='+this.list)
+                    .then(response=>this.json=response.data)
+                    .catch(error=>console.log(error))    
+            }
+        },
+        // update
+        edit: function(element){
+            this.soundEvent.play()
+            if(element.title.length == 0){
+                this.text.error = "Ошибка! Пустое поле."
+                return false
+            }
+            this.text.error = ""
+            this.checkBoxCheckedList.splice(element)
+            
+            axios.get('scripts/edit.php?table='+this.list+"&id="+element.id+"&task="+element.title)
+            this.read()
+            element.title = ""
+        },
+        // delete
+        del: function(element){
+            this.soundEvent.play()
+            axios.get('scripts/delete.php?id='+element.id+'&table='+this.list)
+            this.read()
+            this.task = ""
+        },
     },
     created: function () {
         this.read()
+        this.soundEvent.volume = this.soundSelect.volume = 1
     }
 });
 
