@@ -6,6 +6,11 @@
   cursor: pointer;
   border: none;
   @include btn-active;
+
+  @media (max-width: 475px){
+    padding: 7px;
+    span{display: none !important}
+  }
 }
 
 @mixin btn-active{
