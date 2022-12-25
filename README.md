@@ -4,7 +4,6 @@
 ![alt text](static/images/Screenshot.png)
 
 ## Description
-Watch here: [http://romaxer.ffox.site/](http://romaxer.ffox.site/)
 
 Simple Todo list with login system and 3 task lists for per user can help you manage your own day and don't let you forgot anything.
 Add, remove, edit, delete all tasks in one click and much more!
