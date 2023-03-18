@@ -11,6 +11,8 @@ else if(strlen($pass)<=5) echo "Пароль должен быть более 5 
 $user = R::findOne('users', 'login = ?', array($login));
 
 if( $user && password_verify($pass, $user->pass) ){
-    $_SESSION['logged_user'] = $user;
+    $_SESSION['auth_subsystem'] = $user;
+    $user['is_logged'] = true;
+
     echo "OK";
 } else echo "Логин или пароль неверный";

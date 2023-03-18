@@ -5,11 +5,25 @@ require_once '../includes/config.php';
 $login = $_REQUEST['login'];
 $pass = $_REQUEST['pass'];
 
-if(empty($login)) echo "Вы не ввели логин.";
-else if(empty($pass)) echo "Вы не ввели пароль.";
-else if(strlen($pass)<=5) echo "Пароль должен быть более 5 символов в длину.";
+$response = [];
 
-else if( R::count('users', 'login = ? ', array($login)) ) echo "Пользователь с таким логином уже зарегистрирован";
+if(empty($login)){
+    $response["error"]["no_login"] = true;
+    print_r(json_encode($response));
+}
+else if(empty($pass)){
+    $response["error"]["no_pass"] = true;
+    print_r(json_encode($response));   
+}
+else if(strlen($pass)<=5){
+    $response["error"]["wrong_pass"] = true;
+    print_r(json_encode($response));
+}
+
+else if( R::count('users', 'login = ? ', array($login)) ){
+    $response["error"]["same_login"] = true;
+    print_r(json_encode($response));
+}
 
 else{
     $user = R::dispense('users');

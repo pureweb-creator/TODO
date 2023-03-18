@@ -3,7 +3,7 @@ require_once("includes/config.php");
 
 $task = $_REQUEST['task'];
 $list = $_REQUEST['table'];
-$uid  = $_SESSION['logged_user']->id;
+$uid  = $_SESSION['auth_subsystem']->id;
 
 $cur_user = R::load('users', $uid);
 

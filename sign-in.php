@@ -1,7 +1,7 @@
 <?php
 $title = "Sign in";
-include("scripts/includes/header.php") ?>
-
+include("scripts/includes/header.php");
+ ?>
 
 <main>
     <section class="todo" id="auth">

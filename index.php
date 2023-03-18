@@ -2,10 +2,10 @@
 $title = "Home";
 include("scripts/includes/header.php");
 
-$user = @$_SESSION['logged_user'];
+$user = @$_SESSION['auth_subsystem'];
 $user_ID = @$user->id;
 
-if(isset($user->id)): ?>
+if(isset($_SESSION['auth_subsystem']['is_logged'])): ?>
 
 <main>
     <section id="app" class="todo">

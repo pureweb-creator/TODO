@@ -10,13 +10,16 @@ include("scripts/includes/header.php"); ?>
 			<form class="todo__reg-form text-center" id="signUpForm" @submit.prevent="reg()">
 				<div class="input-group">
 					<input type="text" class="input-group__input" placeholder="Логин" v-model="login">
+					<p v-if="response['error']['no_login']" class="help">Введите логин</p>
 				</div>
 				<div class="input-group">
 					<input type="password" class="input-group__input" placeholder="Пароль" v-model="pass">
+					<p v-if="response['error']['no_pass']" class="help">Введите пароль</p>
+					<p v-if="response['error']['wrong_pass']" class="help">Пароль неверный</p>
 				</div>
 				<button type="submit" class="todo__add-btn">Зарегистрироваться</button>
-				<p v-if="response.data" class="help">{{ response.data }}</p>
-				<div class="sign-up-link">Уже есть аккаунт? <a href="<?php echo SITEURL; ?>/sign-in.php"> Войдите!</a> </div>	
+				<p v-if="response['error']['same_login']" class="help">Пользователь с таким логином уже зарегистрирован</p>
+				<div class="sign-up-link">Уже есть аккаунт? <a href="<?= SITEURL; ?>/sign-in.php"> Войдите!</a> </div>	
 			</form>
 		</div>
 		<?php endif; ?>
@@ -32,14 +35,24 @@ include("scripts/includes/footer.php"); ?>
         data:{
             login: '',
             pass: '',
-            response: ''
+            response: {
+            	error: {
+            		"same_login": false,
+            		"wrong_pass": false,
+            		"no_pass": false,
+            		"no_login": false
+            	}
+            }
         },
         methods: {
             reg: function(){
                 axios
                     .get('scripts/sign-up/do_sign_up.php?login='+this.login+'&pass='+this.pass)
                     .then(response=>{
-                        this.response=response
+                        this.response=response.data
+
+                        console.log(response.data)
+
                         if(this.response.data=="OK"){
                             window.location.replace("./sign-in.php");
                         }

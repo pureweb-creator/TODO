@@ -101,12 +101,12 @@ Vue.component('todo-list', {
         },
         //retrieve
         read: function(){
-            // Один раз почему-то  очень плохо работает..
+            // Один раз почему-то очень плохо работает..
             for (let i = 0; i < 2; i++) {
                 axios
                     .get('scripts/handle.php?table='+this.list)
                     .then(response=>this.json=response.data)
-                    .catch(error=>console.log(error))    
+                    .catch(error=>console.log(error))
             }
         },
         // update
